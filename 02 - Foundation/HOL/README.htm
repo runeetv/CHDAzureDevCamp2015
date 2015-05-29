@@ -1,0 +1,222 @@
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>AzureReadiness: DevCamp</title>
+	  <link rel="stylesheet" href="../../style.css">
+   </head>
+   <body>
+      <div class="container">
+        <h1 class="jumbotron"id="getting-started-with-azure-app-service-web-apps-and-asp-net">Getting started with Azure App Service Web Apps and ASP.NET</h1>
+<p>This lab shows how to create an ASP.NET web application and deploy it to an Azure App Service Web App by using Visual Studio 2015 Preview. It assumes that you have no prior experience using Azure or ASP.NET. On completing the lab, you will have a simple web application up and running in the cloud.</p>
+<p>This lab includes the following sections:</p>
+<ol>
+<li><a href="#create-an-aspnet-web-application">Create an ASP.NET web application in Visual Studio</a></li>
+<li><a href="#deploy-the-application-to-azure">Deploy the application to Azure</a></li>
+<li><a href="#make-a-change-and-redeploy">Make a change and redeploy</a></li>
+<li><a href="#monitor-and-manage-the-site-in-the-management-portal">Monitor and manage the site in the preview portal</a></li>
+<li><a href="#cleanup">Appendix - Cleanup</a></li>
+</ol>
+<h2 id="create-an-asp-net-web-application">Create an ASP.NET web application</h2>
+<p>In this task you will create the web application that is going to be used throughout this lab.</p>
+<ol>
+<li><p>Open Visual Studio. From the <strong>File</strong> menu, hover over the <strong>New</strong> option and click <strong>Project</strong>.</p>
+<p> <img class="img-responsive"src="./images/newProject.png" alt="New Project in File menu"></p>
+<p> <em>New Project in File menu</em></p>
+</li>
+<li><p>In the <strong>New Project</strong> dialog box, expand <strong>C#</strong> and select <strong>Web</strong> under <strong>Installed Templates</strong>, and then select <strong>ASP.NET Web Application</strong>.</p>
+</li>
+<li><p>Name the application <strong>ContactManager</strong> and click <strong>OK</strong>.</p>
+<p> <img class="img-responsive"src="./images/newProject-dialog.png" alt="New Project dialog box"></p>
+<p> <em>New Project dialog box</em></p>
+<blockquote>
+<p><strong>Note:</strong> Make sure you enter &quot;ContactManager&quot;. Code blocks that you will be copying later assume that the project name is ContactManager.</p>
+</blockquote>
+</li>
+<li><p>In the <strong>New ASP.NET Project</strong> dialog box, select the <strong>MVC</strong> template. Verify <strong>Authentication</strong> is set to <strong>Individual User Accounts</strong>, <strong>Host in the cloud</strong> is checked and <strong>Web App</strong> is selected. Then, click <strong>OK</strong>.</p>
+<p> <img class="img-responsive"src="./images/newProject-dialog-2.png" alt="New ASP.NET Project dialog box"></p>
+<p> <em>New ASP.NET Project dialog box</em></p>
+</li>
+<li><p>If you haven&#39;t already signed in to Azure, Visual Studio prompts you to do so. Click <strong>Sign In</strong>. Follow the prompts and provide your credentials.</p>
+<p> <img class="img-responsive"src="./images/sign-to-Azure.png" alt="Sign in to Azure"></p>
+<p> <em>Sign in to Azure</em></p>
+</li>
+<li><p>The configuration wizard will suggest a unique name based on <em>ContactManager</em> (see the image below). Select a region near you. You can use <a href="http://www.azurespeed.com/readme.htm" title="AzureSpeed.com">azurespeed.com</a> to find the lowest latency data center.</p>
+</li>
+<li><p>If you haven&#39;t created a database server before, select <strong>Create new server</strong>, enter a database user name and password.</p>
+<p> <img class="img-responsive"src="./images/configure-azure1.png" alt="Configure Azure Web App"></p>
+<p> <em>Configure Azure Web App</em></p>
+<p> If you have a database server, use that to create a new database. Database servers are a precious resource, and you generally want to create multiple databases on the same server for testing and development rather than creating a database server per database. Make sure your Web App and database are in the same region.</p>
+</li>
+<li><p>Click <strong>OK</strong>.</p>
+<p> In a few seconds, Visual Studio creates the web project in the folder you specified, and it creates the Web App in the Azure region you specified.</p>
+<p> The <strong>Solution Explorer</strong> window shows the files and folders in the new project.</p>
+<p> <img class="img-responsive"src="./images/solution-explorer.png" alt="Solution Explorer"></p>
+<p> <em>Solution Explorer</em></p>
+<p> The <strong>Azure App Service Activity</strong> window shows that the Web App has been created.</p>
+<p> <img class="img-responsive"src="./images/web-publish-view.png" alt="Web App created"></p>
+<p> <em>Web App created</em></p>
+<p> And you can see the Web App and database in <strong>Server Explorer</strong>.</p>
+<blockquote>
+<p><strong>Note:</strong> if the Server Explorer window is not open, you can open it from the <strong>View</strong> menu.</p>
+</blockquote>
+<p> <img class="img-responsive"src="./images/server-explorer.png" alt="Web App created"></p>
+<p> <em>Web App created</em></p>
+</li>
+</ol>
+<h2 id="deploy-the-application-to-azure">Deploy the application to Azure</h2>
+<ol>
+<li><p>In the <strong>Azure App Service Activity</strong> window, click <strong>Publish ContactManager to this Web App now</strong>.</p>
+<p> <img class="img-responsive"src="./images/web-publish-view-2.png" alt="Web App created"></p>
+<p> <em>Azure App Service Activity Window</em></p>
+<p> In a few seconds the <strong>Publish Web</strong> wizard appears.</p>
+<p> The settings that Visual Studio needs to deploy your project to Azure have been saved in a <em>publish profile</em>. The wizard enables you to review and change those settings.</p>
+</li>
+<li><p>In the <strong>Connection</strong> tab of the <strong>Publish Web</strong> wizard, click <strong>Validate Connection</strong> to make sure that Visual Studio can connect to Azure in order to deploy the web project.</p>
+<p> <img class="img-responsive"src="./images/validate-connection.png" alt="Validate connection"></p>
+<p> <em>Validating the connection</em></p>
+<p> When the connection has been validated, a green check mark is shown next to the <strong>Validate Connection</strong> button.</p>
+</li>
+<li><p>Click <strong>Next</strong>.</p>
+<p> <img class="img-responsive"src="./images/validate-connection-2.png" alt="Successfully validated connection"></p>
+<p> <em>Successfully validated connection</em></p>
+</li>
+<li><p>The <strong>Settings</strong> tab is shown. If you expand <strong>File Publish Options</strong> you will see several settings that enable you to handle scenarios that don&#39;t apply to this lab:</p>
+<ul>
+<li><p><strong>Remove additional files at destination</strong>.</p>
+<p>  Deletes any files at the server that aren&#39;t in your project. You might need this if you were deploying a project to a site that you had deployed a different project to earlier.</p>
+</li>
+<li><p><strong>Precompile during publishing</strong>.</p>
+<p>  Can reduce first-request warm up times for large sites.</p>
+</li>
+<li><p><strong>Exclude files from the App_Data folder</strong>.</p>
+<p>  For testing you sometimes have a SQL Server database file in App_Data which you don&#39;t want to deploy to production.</p>
+<p>In this case, keep the default values for <strong>Configuration</strong> and <strong>File Publish Options</strong> and click <strong>Next</strong>.</p>
+<p><img class="img-responsive"src="./images/publishing-settings.png" alt="Settings tab"></p>
+<p><em>Settings tab</em></p>
+</li>
+</ul>
+</li>
+<li><p>In the <strong>Preview</strong> tab, click <strong>Start Preview</strong>.</p>
+<p> <img class="img-responsive"src="./images/start-preview.png" alt="StartPreview button in the Preview tab"></p>
+<p> <em>Start Preview button - Preview tab</em></p>
+<p> The tab displays a list of the files that will be copied to the server. Displaying the preview isn&#39;t required to publish the application but it&#39;s a useful function to be aware of.</p>
+</li>
+<li><p>Click <strong>Publish</strong>.</p>
+<p> <img class="img-responsive"src="./images/click-publish.png" alt="StartPreview file output"></p>
+<p> <em>File Preview</em></p>
+<p> Visual Studio begins the process of copying the files to the Azure server.</p>
+<p> The <strong>Output</strong> and <strong>Azure App Service Activity</strong> windows show what deployment actions were taken and report successful completion of the deployment.</p>
+<p> <img class="img-responsive"src="./images/publish-output.png" alt="Azure App Service Activity"></p>
+<p> <em>Azure App Service Activity reporting successful deployment</em></p>
+<p> <img class="img-responsive"src="./images/output-window.png" alt="Output window"></p>
+<p>   <em>Output Window reporting successful deployment</em></p>
+<p> Upon successful deployment, the default browser automatically opens to the URL of the deployed Web App, and the application that you created is now running in the cloud. The URL in the browser address bar shows that the site is being loaded from the Internet.</p>
+<p> <img class="img-responsive"src="./images/publish-success.png" alt="Web App running in Azure"></p>
+<p> <em>Web App running in Azure</em></p>
+</li>
+<li><p>Close the browser.</p>
+</li>
+</ol>
+<h2 id="make-a-change-and-redeploy">Make a change and redeploy</h2>
+<p>In this task, you will change the <strong>h1</strong> heading of the home page, run the project locally on your development computer to verify the change, and then deploy the change to Azure.</p>
+<ol>
+<li><p>Open the <em>Views/Home/Index.cshtml</em> file in <strong>Solution Explorer</strong>, change the <strong>h1</strong> heading from &quot;ASP.NET&quot; to &quot;ASP.NET and Azure&quot;, and save the file.</p>
+<p> <img class="img-responsive"src="./images/solution-explorer-index.png" alt="MVC index.cshtml"></p>
+<p> <em>Index.cshtml</em></p>
+<p> <img class="img-responsive"src="./images/index-modification.png" alt="MVC h1 change"></p>
+<p> <em>Changing the page&#39;s heading</em></p>
+</li>
+<li><p>Press <strong>CTRL+F5</strong> to see the updated heading by running the site on your local computer.</p>
+<p> <img class="img-responsive"src="./images/running-localhost.png" alt="Web App running locally"></p>
+<p> <em>Web App running locally</em></p>
+<p> The <strong><a href="http://localhost/readme.htm">http://localhost</a></strong> URL shows that it&#39;s running on your local computer. By default it&#39;s running in IIS Express, which is a lightweight version of IIS designed for use during web application development.</p>
+</li>
+<li><p>Close the browser.</p>
+</li>
+<li><p>In <strong>Solution Explorer</strong>, right-click the project, and choose <strong>Publish</strong>.</p>
+<p> <img class="img-responsive"src="./images/second-publish.png" alt="Chooose Publish"></p>
+<p> <em>Preparing a new deployment</em></p>
+<p> The Preview tab of the <strong>Publish Web</strong> wizard appears. If you needed to change any publish settings you could choose a different tab, but now all you want to do is redeploy with the same settings.</p>
+</li>
+<li><p>In the <strong>Publish Web</strong> wizard, click <strong>Publish</strong>.</p>
+<p> <img class="img-responsive"src="./images/click-publish-no-preview.png" alt="Click Publish"></p>
+<p> <em>Publish Web Wizard</em></p>
+<p> Visual Studio deploys the project to Azure and opens the site in the default browser.</p>
+<p> <img class="img-responsive"src="./images/aspnet-and-azure.png" alt="Changed site deployed"></p>
+<p> <em>Changes deployed</em></p>
+<blockquote>
+<p><strong>Tip:</strong> You can enable the <strong>Web One Click Publish</strong> toolbar for even quicker deployment. Click <strong>View</strong> &gt; <strong>Toolbars</strong>, and then select <strong>Web One Click Publish</strong>. The toolbar enables you to select a profile, click a button to publish, or click a button to open the <strong>Publish Web</strong> wizard.</p>
+</blockquote>
+<p> <img class="img-responsive"src="./images/publish-toolbar.png" alt="Web One Click Publish Toolbar"></p>
+<p> <em>Web One Click Publish Toolbar</em></p>
+</li>
+</ol>
+<h2 id="monitor-and-manage-the-site-in-the-preview-portal">Monitor and manage the site in the preview portal</h2>
+<p>The <a href="https://portal.azure.com/readme.htm">Azure Preview Portal</a> is a web interface that enables you to manage and monitor your Azure services, such as the App Service Web App you just created. In this task you will look at some of what you can do in the portal.</p>
+<ol>
+<li><p>In your browser, go to <a href="http://portal.azure.com">http://portal.azure.com</a>, and sign in with your Azure credentials.</p>
+<p> The portal displays the home dashboard.</p>
+<p> On the left, click on <strong>Browse</strong> and then scroll down until you find <strong>Web Apps</strong>. Click on <strong>Web Apps</strong>.</p>
+<p> <img class="img-responsive"src="./images/browse-to-web-apps.png" alt="Browse to Web Apps"></p>
+</li>
+<li><p>Click the name of your Web App on the blade.</p>
+<p> <img class="img-responsive"src="./images/select-website.png" alt="Web Apps blade with the Web App called out"></p>
+<p> <em>Web Apps blade</em></p>
+</li>
+<li><p>This blade gives you an overview of your Web App.</p>
+<p> You can access monitoring information, change the pricing tier, configure continuous deployment and various other tasks.</p>
+<p> <img class="img-responsive"src="./images/web-app-overview-blade.png" alt="Web App overview blade"></p>
+<p>   <em>Web App&#39;s overview blade</em></p>
+<p> At this point your site hasn&#39;t had much traffic and may not show anything in the graph. If you browse to your application, refresh the page a few times, and then come back again, it will show up some traffic.</p>
+</li>
+<li><p>Click at <strong>Settings</strong> at the top of the blade. Then click <strong>Application Settings</strong>.</p>
+<p> The <a href="http://azure.microsoft.com/en-us/documentation/articles/web-sites-configure/readme.htm">Application Settings</a> blade enables you to control the .NET version used for the Web App, enable features such as <a href="http://azure.microsoft.com/blog/2013/11/14/introduction-to-websockets-on-windows-azure-web-sites/readme.htm">WebSockets</a> and <a href="http://azure.microsoft.com/en-us/documentation/articles/web-sites-enable-diagnostic-log/readme.htm">diagnostic logging</a>, set <a href="http://azure.microsoft.com/blog/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work/readme.htm">connection string values</a>, and more.</p>
+<p> <img class="img-responsive"src="./images/website-configure.png" alt="Portal Web App Application Settings blade "></p>
+<p>   <em>WebApp&#39;s settings blade</em></p>
+</li>
+<li><p>Click the <strong>Scale</strong> option, right below <strong>Application Settings</strong>.</p>
+<p> For the paid tiers of the Azure App Service, the <a href="http://azure.microsoft.com/en-us/documentation/articles/web-sites-scale/readme.htm">Scale</a> option enables you to control the size and number of machines that service your web application in order to handle variations in traffic.</p>
+<p> You can scale manually or configure criteria or schedules for automatic scaling.</p>
+<p> <img class="img-responsive"src="./images/website-scale.png" alt="Portal Web App scale options"></p>
+<p> <em>Web App&#39;s Scale Options</em></p>
+<p> These are just a few of the management portal features. You can also create new App Service apps, delete existing apps, stop and restart apps, and manage other kinds of Azure services, such as databases and virtual machines.</p>
+</li>
+</ol>
+<p><a name="cleanup"></a></p>
+<h2 id="appendix-cleanup">Appendix - Cleanup</h2>
+<p>In this task you will learn how to delete the Web App published in the previous section.</p>
+<ol>
+<li><p>In your browser, go to <a href="http://portal.azure.com">http://portal.azure.com</a>, and sign in with your Azure credentials.</p>
+</li>
+<li><p>Click on <strong>Browse</strong> and scroll down until you see <strong>Web Apps</strong>. Click on <strong>Web Apps</strong>.</p>
+</li>
+<li><p>Select your Web App. The Web App blade should now be open.</p>
+</li>
+<li><p>Click <strong>Delete</strong> in the top bar.</p>
+<p> <img class="img-responsive"src="./images/clicking-delete-website.png?raw=true" alt="Clicking Delete Web App"></p>
+<p> <em>Clicking Delete to delete Web App</em></p>
+</li>
+<li><p>In the <strong>Delete app</strong> confirmation dialog, click <strong>Yes</strong>.</p>
+<p> This will delete the Web App but it will keep the database intact. If you want to delete the database as well, follow the instructions below.</p>
+</li>
+<li><p>Click on <strong>Browse</strong> and scroll down until you see <strong>SQL Databases</strong>. Click on <strong>SQL Databases</strong>.</p>
+<p> <img class="img-responsive"src="./images/browse-to-sql-database.png" alt="SQL Databases">
+ <em>Click SQL databases</em></p>
+</li>
+<li><p>In the new <strong>SQL Databases</strong> blade, click on your database.</p>
+<p> The database blade should now be open.</p>
+</li>
+<li><p>Click on <strong>Delete</strong> from the top bar.</p>
+<p> <img class="img-responsive"src="./images/sql-database-blade-click-delete.png" alt="SQL Database delete"></p>
+</li>
+<li><p>In the <strong>Delete database</strong> confirmation dialog, click <strong>Yes</strong>.</p>
+</li>
+</ol>
+<h2 id="summary">Summary</h2>
+<p>In this lab you have seen how to create a simple web application and deploy it to an Azure App Service Web App. You also made a quick tour around the Azure Preview Portal.</p>
+
+      </div>
+  </body>
+</html>
